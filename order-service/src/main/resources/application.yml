@@ -2,12 +2,19 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:mysql:///cloud_order?useSSL=false
+    url: jdbc:mysql://:3306/cloud_order?useSSL=false
     username: root
     password:
     driver-class-name: com.mysql.jdbc.Driver
   application:
-    name: OrderServer #eureka的服务名称
+    name: OrderService #eureka的服务名称
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+#      discovery:
+#        cluster-name: HZ
+#        ephemeral: false
+#        namespace: 4ec6e323-2c7b-4869-bf0a-1b54a40719f0 #dev
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
   configuration:
@@ -17,15 +24,15 @@ logging:
     cn.itcast: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
-eureka:
-  client:
-    service-url: # eureka的地址信息
-      defaultZone: http://127.0.0.1:10086/eureka
+#eureka:
+#  client:
+#    service-url: # eureka的地址信息
+#      defaultZone: http://127.0.0.1:10086/eureka
 userserver:
   ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule
 ribbon:
   eager-load:
     clients:
-      - userserver
+      - userservice
     enabled: true
