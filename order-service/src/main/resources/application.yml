@@ -7,7 +7,7 @@ spring:
     password:
     driver-class-name: com.mysql.jdbc.Driver
   application:
-    name: OrderService #eureka的服务名称
+    name: orderservice #eureka的服务名称
   cloud:
     nacos:
       server-addr: localhost:8848
@@ -36,3 +36,8 @@ ribbon:
     clients:
       - userservice
     enabled: true
+#feign: #feign日志配置
+#  client:
+#    config:
+#      default:
+#        loggerLevel: FULL
